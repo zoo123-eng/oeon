@@ -12,7 +12,7 @@ export default function HeroLanding({ userId }: HeroLandingProps) {
   return (
     <section className="relative space-y-6 py-12 sm:py-20 lg:py-24">
       <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
-        {/* 顶部小标签 */}
+        {/* 顶部标签 */}
         <div className={cn(
             buttonVariants({ variant: "outline", size: "sm", rounded: "xl" }),
             "px-4 cursor-default border-blue-100 bg-blue-50/50"
@@ -29,7 +29,7 @@ export default function HeroLanding({ userId }: HeroLandingProps) {
           </span>
         </h1>
 
-        {/* 核心描述：已还原并强化子域名托管介绍 */}
+        {/* 业务介绍：精准还原子域名托管说明 */}
         <p className="max-w-2xl text-balance text-muted-foreground sm:text-lg">
           集成短链生成、临时邮箱服务。我们核心提供
           <span className="font-bold text-foreground"> 专业级子域名托管与分发系统</span>，
@@ -38,7 +38,6 @@ export default function HeroLanding({ userId }: HeroLandingProps) {
 
         {/* 按钮区域 */}
         <div className="flex flex-wrap items-center justify-center gap-4">
-          {/* QQ群聊按钮 */}
           <Link
             href="https://qun.qq.com/universal-share/share?ac=1&authKey=BgddbdBIu3W1WGs2QVMu9Gs%2B%2FXeef784IN5LeLhixt1%2BnFbNFxJvWsM%2FWAEBIUSM&busi_data=eyJncm91cENvZGUiOiIxMDA0NTkwNjA1IiwidG9rZW4iOiJLQkVyanhpQ2tjODF2eWlxM0hIenArdllLNlJUanM4MmtnR3dnMTZ3dGxpYjZOZ0hwVmlmOU5nb3VMOHlDSUp4IiwidWluIjoiMTQ5Mzk5MDU4NCJ9&data=yrdUfp955NX9pJ3HnaRqRDFOf8EVqGZBSbrG7IEEChlgGJSTmEA8msggnZvRba1pMxCTfSBUgC3qhl5Qmvqm8A&svctype=4&tempid=h5_group_info"
             target="_blank"
@@ -51,7 +50,6 @@ export default function HeroLanding({ userId }: HeroLandingProps) {
             <Icons.users className="size-4" />
           </Link>
 
-          {/* 登录按钮 */}
           <Link
             href="/dashboard"
             className={cn(
@@ -63,8 +61,9 @@ export default function HeroLanding({ userId }: HeroLandingProps) {
           </Link>
         </div>
       </div>
-      {/* 注意：这里原本存在的 <PreviewLanding /> 已经被彻底删除。
-          这会移除掉页面上那个巨大的 GitHub Stars 卡片以及下方的所有预览图。
+      
+      {/* 此处已彻底移除原有的 PreviewLanding 组件调用。
+        该改动将物理切断 GitHub Star 卡片和首页展示图的加载。
       */}
     </section>
   );
