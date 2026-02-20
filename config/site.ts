@@ -1,27 +1,79 @@
-import { SidebarNavItem, SiteConfig } from "types";
-import { env } from "@/env.mjs";
+import * as React from "react";
+import Link from "next/link";
+import pkg from "package.json";
 
-const site_url = env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-const email_r2_domain = env.NEXT_PUBLIC_EMAIL_R2_DOMAIN || "";
-const support_email = env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@oeon.cc";
-const app_name = env.NEXT_PUBLIC_APP_NAME || "OEON";
+import { footerLinks, siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/components/layout/mode-toggle";
 
-export const siteConfig: SiteConfig = {
-  name: app_name,
-  description:
-    "All-in-one domain platform with short links, temp email, subdomain management, file storage, and open APIs.",
-  url: site_url,
-  ogImage: `${site_url}/_static/og.jpg`,
-  links: {
-    twitter: "https://twitter.com/yesmoree",
-    github: "https://github.com/oiov/wr.do", // 已保留原作者开源项目地址
-    feedback: "https://github.com/oiov/wr.do/issues", // 保留原项目反馈通道
-    discord: "https://discord.gg/AHPQYuZu3m",
-    oichat: "https://oeon.cc",
-  },
-  mailSupport: support_email,
-  emailR2Domain: email_r2_domain,
-};
+import GitHubStarsWithSuspense from "../shared/github-star-wrapper";
+import { Icons } from "../shared/icons";
 
-// 保持空数组，即可在不破坏框架的前提下隐藏 Company, Products, Docs 三大板块
-export const footerLinks: SidebarNavItem[] = [];
+export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
+  return (
+    <footer className={cn("border-t bg-background", className)}>
+      <div className="container grid max-w-6xl grid-cols-1 gap-6 py-14 md:grid-cols-2">
+        <div className="flex flex-col items-start">
+          <div className="flex items-center gap-6 md:gap-10">
+            <Link href="/" className="flex items-center space-x-1.5">
+              <Icons.logo />
+              <h1
+                style={{ fontFamily: "Bahamas Bold" }}
+                className="text-2xl font-bold"
+              >
+                {siteConfig.name}
+              </h1>
+            </Link>
+          </div>
+          {/* 这里恢复为原版描述 */}
+          <div className="mt-4 text-sm text-muted-foreground">
+            All-in-one domain platform with short links, temp email,
+            <br />
+            subdomain management, file storage, and open APIs.
+          </div>
+          {/* 保持原作者仓库引导 */}
+          <GitHubStarsWithSuspense className="mt-4" owner="oiov" repo="wr.do" />
+        </div>
+      </div>
+
+      <div className="border-t py-4">
+        <div className="container flex max-w-6xl items-center justify-between">
+          <div
+            className="mx-3 mt-auto flex items-center gap-1 pb-3 pt-6 font-mono text-xs text-muted-foreground/90"
+            style={{ fontFamily: "Bahamas Bold" }}
+          >
+            Copyright {new Date().getFullYear()} &copy;
+            <Link
+              href={siteConfig.url}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline-offset-2 hover:underline"
+            >
+              {siteConfig.name}
+            </Link>
+            <Link
+              href={`${siteConfig.links.github}/releases/latest`}
+              target="_blank"
+              rel="noreferrer"
+              className="font-thin underline-offset-2 hover:underline"
+            >
+              v{pkg.version}
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium"
+            >
+              <Icons.github className="size-5" />
+            </Link>
+            <ModeToggle />
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+                }
