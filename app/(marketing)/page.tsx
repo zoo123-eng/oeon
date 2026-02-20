@@ -1,11 +1,11 @@
 import { getCurrentUser } from "@/lib/session";
 import { constructMetadata } from "@/lib/utils";
 import HeroLanding from "@/components/sections/hero-landing";
-import { InfoLanding } from "@/components/sections/info-landing"; //
+import PreviewLanding from "@/components/sections/preview-landing"; // 引入框架组件
 
 export const metadata = constructMetadata({
-  title: "OEON - 一站式域名服务社区",
-  description: "集成短链、临时邮箱、子域名分发等全方位技术支持。",
+  title: "OEON - 专业级子域名托管服务",
+  description: "一站式域名服务平台，支持多域名接入与 API 自动化调用",
 });
 
 export default async function IndexPage() {
@@ -13,8 +13,8 @@ export default async function IndexPage() {
   return (
     <>
       <HeroLanding userId={user?.id} />
-      {/* 重新放回信息框架，展示子域名托管详情 */}
-      <InfoLanding /> 
+      {/* 核心业务框架展示 */}
+      <PreviewLanding />
     </>
   );
 }
