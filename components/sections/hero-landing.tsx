@@ -12,7 +12,7 @@ export default function HeroLanding({ userId }: HeroLandingProps) {
   return (
     <section className="relative space-y-6 py-12 sm:py-20 lg:py-24">
       <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
-        {/* 顶部小标签 - 已改为纯文字，不再是按钮 */}
+        {/* 顶部小标签 */}
         <div className={cn(
             buttonVariants({ variant: "outline", size: "sm", rounded: "xl" }),
             "px-4 cursor-default border-blue-100 bg-blue-50/50"
@@ -29,7 +29,7 @@ export default function HeroLanding({ userId }: HeroLandingProps) {
           </span>
         </h1>
 
-        {/* 核心描述 - 保留你想要的子域名介绍 */}
+        {/* 核心描述：已还原并强化子域名托管介绍 */}
         <p className="max-w-2xl text-balance text-muted-foreground sm:text-lg">
           集成短链生成、临时邮箱服务。我们核心提供
           <span className="font-bold text-foreground"> 专业级子域名托管与分发系统</span>，
@@ -62,9 +62,10 @@ export default function HeroLanding({ userId }: HeroLandingProps) {
             <span>{userId ? "进入控制台" : "立即开始使用"}</span>
           </Link>
         </div>
-
-        {/* 【关键改动】这里彻底删除了包含 GitHub Stars 卡片的 PreviewLanding 组件和 Div */}
       </div>
+      {/* 注意：这里原本存在的 <PreviewLanding /> 已经被彻底删除。
+          这会移除掉页面上那个巨大的 GitHub Stars 卡片以及下方的所有预览图。
+      */}
     </section>
   );
 }
