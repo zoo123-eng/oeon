@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import { ViewTransitions } from "next-view-transitions";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn, constructMetadata } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
@@ -50,6 +51,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           </NextIntlClientProvider>
           <GoogleAnalytics />
           <UmamiAnalytics />
+          <SpeedInsights />
         </body>
       </html>
     </ViewTransitions>
