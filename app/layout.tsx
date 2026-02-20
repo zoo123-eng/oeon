@@ -1,6 +1,7 @@
 import "@/styles/globals.scss";
 
 import { fontHeading, fontSans, fontSatoshi } from "@/assets/fonts";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
@@ -50,6 +51,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           </NextIntlClientProvider>
           <GoogleAnalytics />
           <UmamiAnalytics />
+          <SpeedInsights />
         </body>
       </html>
     </ViewTransitions>
