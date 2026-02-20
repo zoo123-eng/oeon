@@ -827,40 +827,6 @@ export function TechStackGrid() {
     },
   ];
 
-  return (
-    <div className="mx-auto mt-16 max-w-5xl">
-      <div className="flex flex-col items-center gap-4 text-center">
-        <h2 className="font-mono font-semibold uppercase tracking-wider text-blue-600">
-          {t("TECH STACK")}
-        </h2>
-        <p className="text-balance text-2xl font-semibold text-muted-foreground">
-          {t("Build with your favorite tech stack")}
-        </p>
-      </div>
-
-      <div className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className="cursor-pointer rounded-lg border border-gray-200 bg-white p-6 transition-all duration-200 hover:border-gray-300 hover:shadow-md dark:border-gray-700 dark:bg-muted"
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 text-lg font-bold text-gray-700">
-                {item.icon}
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {item.title}
-              </h3>
-            </div>
-            <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-              {item.description}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export function CardItem({
   bgColor = "bg-yellow-400",
