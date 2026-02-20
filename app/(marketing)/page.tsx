@@ -1,7 +1,7 @@
 import { getCurrentUser } from "@/lib/session";
 import { constructMetadata } from "@/lib/utils";
 import HeroLanding from "@/components/sections/hero-landing";
-// 【关键修改】将 info-landing 改为 preview-landing，对齐你的真实文件名
+// 修复：将 info-landing 改为 preview-landing，对齐你的文件系统
 import PreviewLanding from "@/components/sections/preview-landing"; 
 
 export const metadata = constructMetadata({
@@ -13,8 +13,10 @@ export default async function IndexPage() {
   const user = await getCurrentUser();
   return (
     <>
+      {/* 头部区域 */}
       <HeroLanding userId={user?.id} />
-      {/* 这里的组件名也要对应上 */}
+      
+      {/* 框架展示区域：使用已经存在的预览组件 */}
       <PreviewLanding />
     </>
   );
