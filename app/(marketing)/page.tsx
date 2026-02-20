@@ -1,7 +1,6 @@
 import { getCurrentUser } from "@/lib/session";
 import { constructMetadata } from "@/lib/utils";
-import HeroLanding, { LandingImages } from "@/components/sections/hero-landing";
-import { PricingSection } from "@/components/sections/pricing";
+import HeroLanding from "@/components/sections/hero-landing";
 
 export const metadata = constructMetadata({
   title: "OEON - Your All-In-One Domain Services Platform",
@@ -13,9 +12,11 @@ export default async function IndexPage() {
   const user = await getCurrentUser();
   return (
     <>
+      {/* 只保留核心的 HeroLanding 板块 */}
       <HeroLanding userId={user?.id} />
-      <LandingImages />
-      <PricingSection />
+      
+      {/* 已移除 LandingImages (统计数据/图片预览) */}
+      {/* 已移除 PricingSection (价格/方案展示) */}
     </>
   );
 }
