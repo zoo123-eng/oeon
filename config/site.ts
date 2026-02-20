@@ -4,7 +4,7 @@ import { env } from "@/env.mjs";
 const site_url = env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 const email_r2_domain = env.NEXT_PUBLIC_EMAIL_R2_DOMAIN || "";
 const support_email = env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@wr.do";
-const app_name = env.NEXT_PUBLIC_APP_NAME || "WR.DO";
+const app_name = env.NEXT_PUBLIC_APP_NAME || "OEON";
 
 export const siteConfig: SiteConfig = {
   name: app_name,
