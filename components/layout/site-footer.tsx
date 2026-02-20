@@ -13,8 +13,8 @@ import { Icons } from "../shared/icons";
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <footer className={cn("border-t bg-background", className)}>
-      <div className="container grid max-w-6xl grid-cols-2 gap-6 py-14 md:grid-cols-5">
-        <div className="col-span-full flex flex-col items-start sm:col-span-1 md:col-span-2">
+      <div className="container grid max-w-6xl grid-cols-1 gap-6 py-14 md:grid-cols-2">
+        <div className="flex flex-col items-start">
           <div className="flex items-center gap-6 md:gap-10">
             <Link href="/" className="flex items-center space-x-1.5">
               <Icons.logo />
@@ -26,32 +26,16 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
               </h1>
             </Link>
           </div>
-          <div className="mt-4 text-sm">
+          <div className="mt-4 text-sm text-muted-foreground">
             All-in-one domain platform with short links, temp email,
             <br />
             subdomain management, file storage, and open APIs.
           </div>
+          {/* 这里保留了原项目的 GitHub Star 引导 */}
           <GitHubStarsWithSuspense className="mt-4" owner="oiov" repo="wr.do" />
         </div>
-        {footerLinks.map((section) => (
-          <div key={section.title}>
-            <span className="text-sm font-medium text-foreground">
-              {section.title}
-            </span>
-            <ul className="mt-4 list-inside space-y-3">
-              {section.items?.map((link) => (
-                <li key={link.title}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+
+        {/* 原有的 footerLinks 循环已移除，以隐藏 Company, Products, Docs 板块 */}
       </div>
 
       <div className="border-t py-4">
@@ -81,10 +65,10 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
 
           <div className="flex items-center gap-3">
             <Link
-              href={siteConfig.url}
+              href={siteConfig.links.github}
               target="_blank"
               rel="noreferrer"
-              className="font-medium underline underline-offset-1"
+              className="font-medium hover:text-primary transition-colors"
             >
               <Icons.github className="size-5" />
             </Link>
