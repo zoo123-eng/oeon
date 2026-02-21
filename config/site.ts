@@ -1,26 +1,11 @@
-import { SidebarNavItem, SiteConfig } from "types";
-import { env } from "@/env.mjs";
-
-const site_url = env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-const email_r2_domain = env.NEXT_PUBLIC_EMAIL_R2_DOMAIN || "";
-const support_email = env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@oeon.cc";
-const app_name = env.NEXT_PUBLIC_APP_NAME || "OEON";
-
-export const siteConfig: SiteConfig = {
-  name: app_name,
-  description: "All-in-one domain platform.",
-  url: site_url,
-  ogImage: `${site_url}/_static/og.jpg`,
+export const siteConfig = {
+  name: "OEON",
+  description: "专业级子域名托管与分发系统",
+  url: "https://freename.oeon.cc", // 已更新为你的实际域名
+  ogImage: "https://freename.oeon.cc/og.jpg",
   links: {
-    twitter: "https://twitter.com/yesmoree",
-    github: "https://github.com/oiov/wr.do",
-    feedback: "https://github.com/oiov/wr.do/issues",
-    discord: "https://discord.gg/AHPQYuZu3m",
-    oichat: "https://oeon.cc",
+    github: "https://github.com/zoo123-eng/oeon",
   },
-  mailSupport: support_email,
-  emailR2Domain: email_r2_domain,
-};
+}
 
-// 保持空数组，彻底隐藏底部那三个分类列表
-export const footerLinks: SidebarNavItem[] = [];
+export type SiteConfig = typeof siteConfig
