@@ -4,39 +4,28 @@ import * as React from "react";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/shared/icons";
-import { cn } from "@/lib/utils";
+import useSWR from "swr";
+import { fetcher } from "@/lib/utils";
 
-export function UserAuthForm({ className, ...props }: any) {
-  const [isOeonLoading, setIsOeonLoading] = React.useState(false);
+export function UserAuthForm() {
+  const { data: loginMethod } = useSWR("/api/feature", fetcher);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  // 只要接口返回了 linuxdo (我们在第一步强行设为 true 了)
+  if (!loginMethod || !loginMethod.linuxdo) return null;
 
   return (
-    <div className={cn("grid gap-3", className)} {...props}>
-      {/* 🔴 强行显示 OEON 按钮，不走框架的自动判断逻辑 */}
+    <div className="grid gap-3">
       <Button
         variant="outline"
-        type="button"
-        disabled={isOeonLoading}
+        disabled={isLoading}
         onClick={() => {
-          setIsOeonLoading(true);
-          signIn("oeon"); 
+          setIsLoading(true);
+          signIn("oeon"); // 对接后端的 oeonProvider
         }}
       >
-        {isOeonLoading ? (
-          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.user className="mr-2 h-4 w-4" /> 
-        )}
+        {isLoading ? <Icons.spinner className="mr-2 animate-spin" /> : <Icons.user className="mr-2" />}
         OEON 论坛登录
-      </Button>
-
-      {/* 保持 GitHub 按钮不变 */}
-      <Button
-        variant="outline"
-        type="button"
-        onClick={() => signIn("github")}
-      >
-        <Icons.github className="mr-2 h-4 w-4" />
-        Github
       </Button>
     </div>
   );
