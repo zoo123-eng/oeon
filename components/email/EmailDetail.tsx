@@ -101,6 +101,8 @@ export default function EmailDetail({
       `${siteConfig.emailR2Domain}/${attachment.r2Path}`,
       attachment.filename,
     );
+    // 修改报错的那一行，增加一个空值校验或默认值
+const downloadUrl = `${siteConfig.emailR2Domain || ''}/${attachment.id}`;
     // downloadFileFromUrl(
     //   `${siteConfig.emailR2Domain}/${attachment.r2Path}`,
     //   attachment.filename,
