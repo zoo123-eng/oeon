@@ -102,7 +102,7 @@ export default function EmailDetail({
       attachment.filename,
     );
     // 修改报错的那一行，增加一个空值校验或默认值
-const downloadUrl = `${siteConfig.emailR2Domain || ''}/${attachment.id}`;
+const downloadUrl = `${siteConfig.emailR2Domain}/${(attachment as any).id || (attachment as any).filename}`;
     // downloadFileFromUrl(
     //   `${siteConfig.emailR2Domain}/${attachment.r2Path}`,
     //   attachment.filename,
