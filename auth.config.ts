@@ -3,33 +3,30 @@ import Credentials from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 
-// import Resend from "next-auth/providers/resend";
-
 import { env } from "@/env.mjs";
 
+// 这里就是我们要替换的“论坛登录”逻辑
 const linuxDoProvider: any = {
-  id: "linuxdo",
-  name: "Linux Do",
+  id: "linuxdo", // 保持 ID 不变，复用原有的按钮逻辑
+  name: "OEON 论坛登录", 
   version: "2.0",
   type: "oauth",
-  authorization: "https://connect.linux.do/oauth2/authorize",
-  token: "https://connect.linux.do/oauth2/token",
-  userinfo: "https://connect.linux.do/api/user",
-  clientId: env.LinuxDo_CLIENT_ID,
+  // 指向你的论坛域名
+  authorization: "https://oeon.cc/oauth/authorize",
+  token: "https://oeon.cc/oauth/token",
+  userinfo: "https://oeon.cc/wp-json/wp/v2/users/me",
+  clientId: env.LinuxDo_CLIENT_ID, 
   clientSecret: env.LinuxDo_CLIENT_SECRET,
   checks: ["state"],
   profile: (profile: any) => {
-    console.log("profile", profile);
+    console.log("WP Profile from oeon.cc:", profile);
+    // 映射 WordPress 的用户信息
     return {
       id: profile.id.toString(),
-      name: profile.username,
-      image: profile.avatar_url,
+      name: profile.name || profile.username,
       email: profile.email,
-      active: profile.active ? 1 : 0,
-      // username: profile.username,
-      // trust_level: profile.trust_level,
-      // silenced: profile.user.silenced,
-      // email: profile.user.email,
+      image: profile.avatar_urls?.["96"] || profile.avatar_url,
+      active: 1, // 确保登录后是激活状态
     };
   },
 };
@@ -44,27 +41,7 @@ export default {
       clientId: env.GITHUB_ID,
       clientSecret: env.GITHUB_SECRET,
     }),
-    // Resend({
-    //   apiKey: env.RESEND_API_KEY,
-    //   from: env.EMAIL_FROM || "wrdo <support@wr.do>",
-    //   async sendVerificationRequest({ identifier: email, url, provider }) {
-    //     try {
-    //       const { error } = await resend.emails.send({
-    //         from: provider.from || "no-reply@wr.do",
-    //         to: [email],
-    //         subject: "Verify your email address",
-    //         html: getVerificationEmailHtml({ url, appName: siteConfig.name }),
-    //       });
-
-    //       if (error) {
-    //         throw new Error(`Resend error: ${JSON.stringify(error)}`);
-    //       }
-    //     } catch (error) {
-    //       console.error("Error sending verification email", error);
-    //       throw new Error("Error sending verification email");
-    //     }
-    //   },
-    // }),
+    // 我们的“偷梁换柱”在这里生效
     linuxDoProvider,
     Credentials({
       name: "Credentials",
