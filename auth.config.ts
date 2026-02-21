@@ -5,14 +5,13 @@ import Google from "next-auth/providers/google";
 
 import { env } from "@/env.mjs";
 
-// 这里就是我们要替换的“论坛登录”逻辑
+// 定义 WordPress 论坛登录 Provider
 const linuxDoProvider: any = {
-  id: "linuxdo", // 保持 ID 不变，复用原有的按钮逻辑
+  id: "linuxdo", // 保持 ID 为 linuxdo 以复用现有路由
   name: "OEON 论坛登录", 
   version: "2.0",
   type: "oauth",
-  // 指向你的论坛域名
-  authorization: "https://oeon.cc/oauth/authorize",
+  authorization: "https://oeon.cc/oauth/authorize", // 你的论坛域名
   token: "https://oeon.cc/oauth/token",
   userinfo: "https://oeon.cc/wp-json/wp/v2/users/me",
   clientId: env.LinuxDo_CLIENT_ID, 
@@ -20,13 +19,12 @@ const linuxDoProvider: any = {
   checks: ["state"],
   profile: (profile: any) => {
     console.log("WP Profile from oeon.cc:", profile);
-    // 映射 WordPress 的用户信息
     return {
       id: profile.id.toString(),
       name: profile.name || profile.username,
       email: profile.email,
       image: profile.avatar_urls?.["96"] || profile.avatar_url,
-      active: 1, // 确保登录后是激活状态
+      active: 1, 
     };
   },
 };
@@ -41,8 +39,8 @@ export default {
       clientId: env.GITHUB_ID,
       clientSecret: env.GITHUB_SECRET,
     }),
-    // 我们的“偷梁换柱”在这里生效
-    linuxDoProvider,
+    // 关键点：将定义的 linuxDoProvider 放入数组中
+    linuxDoProvider, 
     Credentials({
       name: "Credentials",
       credentials: {
