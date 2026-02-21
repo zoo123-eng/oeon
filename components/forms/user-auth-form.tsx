@@ -12,7 +12,7 @@ export function UserAuthForm({ className, ...props }: any) {
 
   return (
     <div className={cn("grid gap-3", className)} {...props}>
-      {/* 1. GitHub 登录按钮（保留你配好的逻辑） */}
+      {/* GitHub 登录按钮 */}
       <Button
         variant="outline"
         type="button"
@@ -27,24 +27,24 @@ export function UserAuthForm({ className, ...props }: any) {
         ) : (
           <Icons.github className="mr-2 h-4 w-4" />
         )}
-        Github
+        使用 GitHub 登录
       </Button>
 
-      {/* 2. OEON 论坛登录按钮（这就是我们要加的专属按钮） */}
+      {/* 🔴 OEON 论坛专属按钮组件 */}
       <Button
         variant="outline"
         type="button"
         disabled={isGithubLoading || isOeonLoading}
         onClick={() => {
           setIsOeonLoading(true);
-          // 🔴 这里的 "oeon" 必须和后端配置里的 ID 一模一样
+          // 🔴 这里的 "oeon" 必须和 auth.config.ts 里的 id 一致
           signIn("oeon"); 
         }}
       >
         {isOeonLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
-          <Icons.user className="mr-2 h-4 w-4" />
+          <Icons.user className="mr-2 h-4 w-4" /> 
         )}
         OEON 论坛登录
       </Button>
