@@ -1,6 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
 import Github from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
 
 const oeonProvider: any = {
   id: "oeon", 
@@ -12,20 +11,17 @@ const oeonProvider: any = {
   clientId: "Yt5CreWJGqJBGNKqrGgzKl1S3EZN3b42AYMZaves", 
   clientSecret: "hhe5I2CUALOivL3dMNUxQhqQQhrR5qx0ANHjQcjQ",
   checks: ["state"],
-  profile: (profile: any) => {
-    return {
-      id: profile.id.toString(),
-      name: profile.name || profile.username,
-      email: profile.email,
-      image: profile.avatar_urls?.["96"] || profile.avatar_url,
-      active: 1, 
-    };
-  },
+  profile: (profile: any) => ({
+    id: profile.id.toString(),
+    name: profile.name || profile.username,
+    email: profile.email,
+    image: profile.avatar_urls?.["96"] || profile.avatar_url,
+  }),
 };
 
 export default {
   providers: [
-    oeonProvider, // 🔴 放在第一位，确保它被加载
+    oeonProvider,
     Github({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
